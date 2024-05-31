@@ -92,9 +92,8 @@ GameData getGameDataFromLine(const std::string& str) {
     return data;
 }
 
-int main()
+int runPartOne(const std::string& filename)
 {
-    std::string filename = "aoc2.txt";
     std::vector<std::string> lines = readLinesFromFile(filename);
     int total = 0;
     for (auto line : lines)
@@ -107,5 +106,26 @@ int main()
             total += gameData.gameNumber;
         }
     }
-	return 0;
+    return total;
+}
+
+int runPartTwo(const std::string& filename)
+{
+    std::vector<std::string> lines = readLinesFromFile(filename);
+    int total = 0;
+    for (auto line : lines)
+    {
+        GameData gameData = getGameDataFromLine(line);
+        int power = gameData.redCount * gameData.greenCount * gameData.blueCount;
+        total += power;
+    }
+    return total;
+}
+
+int main()
+{
+    std::string filename = "aoc2.txt";
+    int partOne = runPartOne(filename);
+    int partTwo = runPartTwo(filename);
+    std::cout << "Part 1 Total: " << partOne << std::endl << "Part 2 Total: " << partTwo << std::endl;
 }
